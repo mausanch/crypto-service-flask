@@ -1,6 +1,6 @@
 from pynewhope import newhope
-from Crypto.Cipher import AES
-from Crypto.Hash import SHA256
+from Cryptodome.Cipher import AES
+from Cryptodome.Hash import SHA256
 import sys
 import os
 
