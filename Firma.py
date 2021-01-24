@@ -5,7 +5,7 @@ from Cryptodome.PublicKey import RSA
 from Cryptodome.Signature import PKCS1_v1_5
 import codecs
 
-message=input ("Dijete Mensaje \n")
+message=input ("Digite Mensaje \n")
 message.encode('utf8')
 message=bytes(message,'utf8')
 

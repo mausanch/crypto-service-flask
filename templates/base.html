@@ -11,25 +11,9 @@
 {% block body %}
 <body>
 
-{% block navbar %}
-Microblog: 
-<ul class="nav nav-pills">
-    <li class="nav-item">
-        <a class="nav-link active" href="{{ url_for('index') }}">Home</a>
-    </li>
-</ul>
-{% endblock %}
 
-    <hr>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-           </ul>
-       {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
+    {% block content %}
+    
+    {% endblock %}
 </body>
 {% endblock %}
