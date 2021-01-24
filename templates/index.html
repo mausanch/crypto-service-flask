@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Criptografía{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  --------------
+</div>
+{% endblock %}
+
+
+{% block content %}         
+            <form action = "http://localhost:5000/services" method = "post">
+                <div>   
+                    <label>Seleccione el archivo</label>
+                    <p><input type = "file" name = "Archivo_Cifrar" /></p>
+                    <label>Contraseña</label>
+                    <p><input type = "text" name = "Contrasenia_Cifrar" /></p>
+                    <input type="submit" name="submit_button" value="Cifrar">
+                </div>
+                <div> 
+                    <label>Seleccione el archivo</label>
+                    <p><input type = "file" name = "Archivo_Decifrar" /></p>
+                    <label>Contraseña</label>
+                    <p><input type = "text" name = "Contrasenia_Decifrar" /></p>   
+                    <input type="submit" name="submit_button" value="Decifrar">
+                </div>
+                <div>     
+                    <label>Seleccione el archivo</label>
+                    <p><input type = "file" name = "Archivo_Firmar" /></p>
+                    <label>Seleccion la clave privada</label>
+                    <p><input type = "file" name = "Clave_Firmar" /></p>
+                    <input type="submit" name="submit_button" value="Firmar">
+                </div>
+                <div> 
+                    <label>Seleccione el archivo</label>
+                    <p><input type = "file" name = "Archivo_Verificar" /></p>
+                    <label>Seleccione la clave pública</label>
+                    <p><input type = "file" name = "Clave_Verificar" /></p>               
+                    <input type="submit" name="submit_button" value="Verificar">
+                </div> 
+                    <label>Seleccione el archivo</label>
+                    <p><input type = "file" name = "Archivo_CF" /></p>
+                    <label>Contraseña</label>
+                    <p><input type = "text" name = "Contrasenia_CF" /></p>  
+                    <label>Seleccione la clave privada</label>
+                    <p><input type = "file" name = "Clave_CF" /></p>   
+                    <input type="submit" name="submit_button" value="Cifrar y Firmar">
+                <div>
+                    <label>Seleccione el arvhico</label>
+                    <p><input type = "file" name = "Archivo_DV" /></p>
+                    <label>Contraseña</label>
+                    <p><input type = "text" name = "Contrasenia_DV" /></p>
+                    <label>Seleccione la clave pública</label>
+                    <p><input type = "file" name = "Clave_DV" /></p>  
+                    <input type="submit" name="submit_button" value="Decifrar y verificar">
+                </div>
+        </form>
+{% endblock %}
