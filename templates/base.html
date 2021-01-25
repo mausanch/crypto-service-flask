@@ -1,19 +1,14 @@
 {% extends "bootstrap/base.html" %}
+{% block navbar %}
+{{nav.top.render()}}
+{% endblock %}
+
 {% block head %}
-    {{ super() }}
-    {% if title %}
-        <title> {{ title }} - Book Blog</title>
-    {% else %}
-        <title> Welcome to Book Blog!</title>
-    {% endif %}
+
 {% endblock %}
 
 {% block body %}
-<body>
-
-
     {% block content %}
     
     {% endblock %}
-</body>
 {% endblock %}

@@ -125,7 +125,7 @@ def encriptar(dire,key,iv,dirout):
         archivo_encriptado.write(enc)
     archivo.close()
     archivo_encriptado.close()
-
+    return archivo_encriptado
 
 #funcion desencriptado
 #se ingresa direccion de archivo encriptado, ruta de la llave, vector para
@@ -149,6 +149,8 @@ def desencriptar(dire,key,iv,dirout):
         tam -= n
     archivo.close()
     archivo_desencriptado.close()
+    return archivo_desencriptado
+    
 
 #el codigo de abajo es para probar las funciones solo retire las comillas
 '''
