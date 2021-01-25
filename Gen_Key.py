@@ -1,14 +1,25 @@
-
 from os import system
-
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5
 
+#funcion de generacion de firmas
+#se ingresa la direccion de donde se quiere guardar las claves de salida
+def generarFirma(clave_privada_out, clave_publica_out):
+        key=RSA.generate(1024)
 
-key=RSA.generate(1024)
+        with open(clave_privada_out, 'wb') as f:
+                f.write(key.exportKey('PEM'))
+        with open(clave_publica_out, 'wb') as f:
+                f.write(key.publickey().exportKey('PEM'))
+        return 0
 
-with open('privkey.pem', 'wb') as f:
-        f.write(key.exportKey('PEM'))
-with open('pubkey.pem', 'wb') as f:
-        f.write(key.publickey().exportKey('PEM'))
+
+
+'''
+clave_privada_out1='chemapriv.PEM'
+clave_publica_out1='chemapub.PEM'
+
+generarFirma(clave_privada_out1,clave_publica_out1)
+
+'''
