@@ -7,26 +7,22 @@ from Cryptodome.Signature import PKCS1_v1_5
 import codecs
 
 
-Verificador=open('Verificador_de_firma.txt','rb').read()
 
+def verificar(dire,key,message):
+    Verificador=open(dire,'rb').read()
 
+    rec=codecs.getdecoder('hex')
+    Verificador=rec(Verificador)[0]
 
-rec=codecs.getdecoder('hex')
-Verificador=rec(Verificador)[0]
+    message.encode('utf8')
+    message=bytes(message,'utf8')
 
-
-
-message=input ("Dijete Mensaje \n")
-message.encode('utf8')
-message=bytes(message,'utf8')
-
-
-with open('privkey.pem', 'rb') as f:
-    key = RSA.importKey(f.read())
-hasher = SHA256.new(message)
-verifier = PKCS1_v1_5.new(key)
-if verifier.verify(hasher, Verificador):
-    print('Verificaccion CORRECTA')
-else:
-    print('EL MENSAJE NO ES EL MISMO')
+    with open(key, 'rb') as f:
+        key = RSA.importKey(f.read())
+    hasher = SHA256.new(message)
+    verifier = PKCS1_v1_5.new(key)
+    if verifier.verify(hasher, Verificador):
+        return print('Verificaccion valida')
+    else:
+        return print('Verificación invalida')
 
