@@ -1,39 +1,33 @@
-import errno
+
 
 from Cryptodome.Hash import SHA256
 from Cryptodome.PublicKey import RSA
 from Cryptodome.Signature import PKCS1_v1_5
-import codecs
 
-message=input ("Digite Mensaje \n")
-message.encode('utf8')
-message=bytes(message,'utf8')
+import base64
+#message=input ("Dijete Mensaje \n") # ARCHIVO PDF, PGN, GET. 
+key ="C:\Proy\Imagen.png"
+messagerec="C:\Proy\privkey.pem"
 
-try:
-    with open('privkey.pem', 'r') as f:
+
+def Firma (key,messagerec):
+    message = open(messagerec, 'rb')  ## Leemos ARCHIVO 
+    archivo_leido = message.read()
+    archivo_codificado = base64.b64encode(archivo_leido) #CONVERSION A 64 BITS 
+    #print(archivo_codificado)
+
+
+    with open(key, 'rb') as f:
         key = RSA.importKey(f.read())
-       
-except IOError as e:
-    if e.errno != errno.ENOENT:
-        raise
-    # No private key, generate a new one. This can take a few seconds.
-    key = RSA.generate(1024)
-    key2 = RSA.generate(1024)
-    with open('privkey.pem', 'wb') as f:
-        f.write(key.exportKey('PEM'))
-    with open('pubkey.pem', 'wb') as f:
-        f.write(key2.publickey().exportKey('PEM'))
 
-hasher = SHA256.new(message)
-signer = PKCS1_v1_5.new(key)
-signature = signer.sign(hasher)
-print (signature)
-print ("\n\n")
-hexa=codecs.getencoder('hex')
-m=hexa(signature)[0]
+    hasher = SHA256.new(archivo_codificado)
+    signer = PKCS1_v1_5.new(key)
+    signature = signer.sign(hasher)
 
-with open('Verificador_de_firma.txt','wb') as arch:
-    arch.write(m)
-    pass
 
-print (m)
+    with open('Firma_Digital.txt','wb') as arch:
+        Firma=arch.write(signature)
+  
+
+    return Firma
+
