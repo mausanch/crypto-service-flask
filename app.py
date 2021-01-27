@@ -75,28 +75,30 @@ def Cipher():
     iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
     iv = bytearray(iv)
     if request.method == 'POST':    
-        dire=  request.form['Archivo_Cifrar']
-        key=   request.form['Contrasenia_Cifrar']
-        dirout=request.form['Archivo_Cifrar']        
-        return encriptar(dire,key,iv,dirout)
-
-
-
-
-
+        File2Cip=  request.files['Archivo_Cifrar']     
+        D_File2Cip=UploadDirectory+secure_filename(File2Cip.filename)
+        File2SCip.save(D_File2Cip)        
+        key2Cip=   request.files['Contrasenia_Cifrar']
+        D_key2Cip=UploadDirectory+secure_filename(key2Cip.filename)
+        key2Cip.save(D_key2Cip) 
+        D_Cip= encriptar (D_File2Cip,D_key2Cip,iv,UploadDirectory)
+        return send_from_directory(directory=UploadDirectory, filename=D_Cip)
 
 @app.route('/Decipher',methods = ['POST', 'GET'])
 def Decipher():
     iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
     iv = bytearray(iv)
     if request.method == 'POST':
-        dire=  request.form['Archivo_Decifrar']
-        key=   request.form['Contrasenia_Decifrar']
-        iv=    request.form['IV_Decifrar']
-        dirout=request.form['Archivo_Decifrar']
-        return desencriptar(dire,key,iv,dirout) 
+        File2Dec=  request.files['Archivo_Decifrar']     
+        D_File2Dec=UploadDirectory+secure_filename(File2Dec.filename)
+        File2SCip.save(D_File2Dec)        
+        key2Dec=   request.files['Contrasenia_Decifrar']
+        D_key2Dec=UploadDirectory+secure_filename(key2Dec.filename)
+        key2Dec.save(D_key2Dec) 
+        Extension= request.form['Extension_Decifrar']
+        D_Dec= desencriptar (D_File2Dec,D_key2Dec,iv,UploadDirectory)
+        return send_from_directory(directory=UploadDirectory, filename=D_Dec)
  
-
  
 @app.route('/Signature',methods = ['POST', 'GET'])
 def Signature():
@@ -109,14 +111,7 @@ def Signature():
         key2Sig.save(D_key2Sig) 
         D_Firma= Firma (D_File2Sig,D_key2Sig,UploadDirectory)
         return send_from_directory(directory=UploadDirectory, filename=D_Firma)
-'''
-@app.route('<path:filename>', methods=['GET', 'POST'])
-def download(UploadDirectory,filename):
-    # Appending app path to upload folder path within app root folder
-    #uploads = os.path.join (current_app.root_path, app.config[UploadDirectory])
-    # Returning file from appended path
-    return send_from_directory(directory=UploadDirectory, filename=filename)
-'''
+
  
 @app.route('/Verify',methods = ['POST', 'GET'])
 def Verify():
