@@ -6,7 +6,7 @@ import base64
 #funcion que firma cualquier documento
 #se deben ingresar las rutas de: el archivo de la llave privada, del archivo a firmar
 #y la ruta de donde se quiera guardar la firma digital ** En todas se debe especificar el tipo de archivo **
-def Firma (key,messagerec):
+def Firma (key,messagerec,firma_digital_out):
     message = open(messagerec, 'rb')  
     archivo_leido = message.read()
     archivo_codificado = base64.b64encode(archivo_leido) #CONVERSION A 64 BITS 
