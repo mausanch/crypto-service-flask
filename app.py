@@ -27,6 +27,9 @@ nav.register_element('top', topbar)
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
+# Ruta de archivos 
+UploadDirectory='./var/www/uploads/'
+
 
 @app.route("/")
 def index():
@@ -99,11 +102,14 @@ def Decipher():
 @app.route('/Signature',methods = ['POST', 'GET'])
 def Signature():
     if request.method == 'POST': 
-        File2Sig=  request.files['Archivo_Firmar']
-        D_File2Sig='./var/www/uploads/'+secure_filename(File2Sig.filename)
+        File2Sig=  request.files['Archivo_Firmar']     
+        D_File2Sig=UploadDirectory+secure_filename(File2Sig.filename)
         File2Sig.save(D_File2Sig)        
-        key=   request.files['Clave_Firmar']
-        return Firma (D_File2Sig,key) 
+        key2Sig=   request.files['Clave_Firmar']
+        D_key2Sig=UploadDirectory+secure_filename(key2Sig.filename)
+        key2Sig.save(D_key2Sig) 
+        Firma (D_File2Sig,D_key2Sig)
+        return "ok"
 
 @app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
@@ -134,8 +140,6 @@ def DecVer():
     iv = bytearray(iv)
     if request.method == 'POST':
         pass
-
-
 
 if __name__ == '__main__':
    app.run()
