@@ -141,14 +141,12 @@
                         </button>
                         </div>
                         <div class="modal-body">               
-                            <form action = "http://localhost:5000/Signature" method = "post">
+                            <form action = "http://localhost:5000/Signature" method = "post" enctype="multipart/form-data">
                                 <div>     
-                                    <label>Seleccione el archivo</label>
+                                    <label>Seleccione el archivoa firmar</label>
                                     <p><input type = "file" name = "Archivo_Firmar" /></p>
                                     <label>Seleccion la clave privada</label>
                                     <p><input type = "file" name = "Clave_Firmar" /></p>
-                                    <label>Mensaje a firmar</label>
-                                    <p><input type = "file" name = "Mensaje_Firmar" /></p>
                                     <input type="submit" name="submit_button" value="Firmar">
                                 </div>
                             </form>    

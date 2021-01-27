@@ -4,6 +4,8 @@ from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import *
 from dominate.tags import img
+from werkzeug.utils import secure_filename
+
 
 #Se importan los modulos correspondientes 
 from KEYGENCIPHERFUN import genAlicemsg,genBobmsg,genAlicesharedkey,encriptar,desencriptar
@@ -89,10 +91,11 @@ def Decipher():
 @app.route('/Signature',methods = ['POST', 'GET'])
 def Signature():
     if request.method == 'POST': 
-        dire=  request.form['Archivo_Firmar']
-        key=   request.form['Clave_Firmar']
-        message=   request.form['Mensaje_Firmar']
-        return Firma (dire,key,message) 
+        File2Sig=  request.files['Archivo_Firmar']
+        D_File2Sig='/var/www/uploads/'+secure_filename(File2Sig.filename)
+        File2Sig.save(D_File2Sig)        
+        key=   request.files['Clave_Firmar']
+        return Firma (D_File2Sig,key) 
  
 @app.route('/Verify',methods = ['POST', 'GET'])
 def Verify():
