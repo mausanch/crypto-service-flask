@@ -1,5 +1,7 @@
 #Se importan los modulos correspondientes a Flask 
-from flask import Flask, render_template, redirect, url_for, request
+import os
+from flask import Flask, render_template, redirect, url_for, request, send_from_directory
+from flask.globals import current_app
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import *
@@ -75,6 +77,10 @@ def Cipher():
         return encriptar(dire,key,iv,dirout)
 
 
+
+
+
+
 @app.route('/Decipher',methods = ['POST', 'GET'])
 def Decipher():
     iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
@@ -92,10 +98,18 @@ def Decipher():
 def Signature():
     if request.method == 'POST': 
         File2Sig=  request.files['Archivo_Firmar']
-        D_File2Sig='/var/www/uploads/'+secure_filename(File2Sig.filename)
+        D_File2Sig='./var/www/uploads/'+secure_filename(File2Sig.filename)
         File2Sig.save(D_File2Sig)        
         key=   request.files['Clave_Firmar']
         return Firma (D_File2Sig,key) 
+
+@app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    # Appending app path to upload folder path within app root folder
+    uploads = os.path.join (current_app.root_path, app.config['./var/www/uploads/'])
+    # Returning file from appended path
+    return send_from_directory(directory=uploads, filename=filename)
+
  
 @app.route('/Verify',methods = ['POST', 'GET'])
 def Verify():
