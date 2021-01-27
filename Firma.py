@@ -22,13 +22,12 @@ def Firma (key,messagerec,UploadDirectory):
     signer = PKCS1_v1_5.new(key)
     signature = signer.sign(hasher)
     f.close()
-
-    Dirr=UploadDirectory+'Firma_digital_out.txt'
+    Filename='Firma_digital_out.txt'
+    Dirr=UploadDirectory+Filename
     with open(Dirr,'wb') as arch:
         Firma=arch.write(signature)
     arch.close()
-
-    return Dirr
+    return Filename
 
 
 

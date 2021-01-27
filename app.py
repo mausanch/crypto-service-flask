@@ -18,7 +18,6 @@ logo = img(src='./static/img/Turing_Machine.png', height="50", width="50", style
 topbar = Navbar(logo)
 
 
-UploadDirectory='./var/www/uploads/'
 # registers the "top" menubar
 nav = Nav()
 nav.register_element('top', topbar)
@@ -108,16 +107,16 @@ def Signature():
         key2Sig=   request.files['Clave_Firmar']
         D_key2Sig=UploadDirectory+secure_filename(key2Sig.filename)
         key2Sig.save(D_key2Sig) 
-        Firma (D_File2Sig,D_key2Sig)
-        return "ok"
-
-@app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
-def download(filename):
+        D_Firma= Firma (D_File2Sig,D_key2Sig,UploadDirectory)
+        return send_from_directory(directory=UploadDirectory, filename=D_Firma)
+'''
+@app.route('<path:filename>', methods=['GET', 'POST'])
+def download(UploadDirectory,filename):
     # Appending app path to upload folder path within app root folder
-    uploads = os.path.join (current_app.root_path, app.config[UploadDirectory])
+    #uploads = os.path.join (current_app.root_path, app.config[UploadDirectory])
     # Returning file from appended path
-    return send_from_directory(directory=uploads, filename=filename)
-
+    return send_from_directory(directory=UploadDirectory, filename=filename)
+'''
  
 @app.route('/Verify',methods = ['POST', 'GET'])
 def Verify():
