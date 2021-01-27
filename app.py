@@ -17,6 +17,8 @@ from Firma import Firma
 logo = img(src='./static/img/Turing_Machine.png', height="50", width="50", style="margin-top:-15px")
 topbar = Navbar(logo)
 
+
+UploadDirectory='./var/www/uploads/'
 # registers the "top" menubar
 nav = Nav()
 nav.register_element('top', topbar)
@@ -106,7 +108,7 @@ def Signature():
 @app.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     # Appending app path to upload folder path within app root folder
-    uploads = os.path.join (current_app.root_path, app.config['./var/www/uploads/'])
+    uploads = os.path.join (current_app.root_path, app.config[UploadDirectory])
     # Returning file from appended path
     return send_from_directory(directory=uploads, filename=filename)
 
