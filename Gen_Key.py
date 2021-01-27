@@ -1,7 +1,7 @@
 from os import system
-from Crypto.Hash import SHA256
-from Crypto.PublicKey import RSA
-from Crypto.Signature import PKCS1_v1_5
+from Cryptodome.Hash import SHA256
+from Cryptodome.PublicKey import RSA
+from Cryptodome.Signature import PKCS1_v1_5
 
 #funcion de generacion de firmas
 #se ingresa la direccion de donde se quiere guardar las claves de salida

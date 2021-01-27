@@ -1,7 +1,31 @@
-{% extends "base.html" %}
+{% extends "bootstrap/base.html" %}
 
 
 {% block title %}Criptografía{% endblock %}
+
+{% block navbar %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+           
+        </div>
+        <div id="navbar" class="navbar-collapse collapse navbar-right">
+            
+            Amantes de los Tsurus tuneados
+
+        </div>    
+      </div>
+    </nav>
+
+
+{% endblock %}
 
 {% block styles %}
 {{super()}}
@@ -16,61 +40,219 @@
 
 
 
-
-{% block navbar %}
-{{nav.top.render()}}
-{% endblock %}
-
-
 {% block content %}         
-            <form action = "http://localhost:5000/services" method = "post">
-                <div>   
-                    <label>Seleccione el archivo</label>
-                    <p><input type = "file" name = "Archivo_Cifrar" /></p>
-                    <label>Contraseña</label>
-                    <p><input type = "file" name = "Contrasenia_Cifrar" /></p>
-                    <input type="submit" name="submit_button" value="Cifrar">
+
+        <!-- Button trigger modal -->
+   
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenterCipher" id='Cipher'>
+            Cifrar
+        </button>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenterDecipher" id='Decipher'>
+            Decifrar
+        </button>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenterSignature" id='Signature'>
+            Firmar
+        </button>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenterVerify" id='Verify'>
+            Verificar
+        </button>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenterSigCip" id='SigCip'>
+            Firmar y Cifrar
+        </button>
+        
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalCenterDecVer" id='DecVer'>
+            Decifrar y Verificar
+        </button>
+        
+
+        <!-- Modal Cifrado -->
+        <div class="modal fade" id="ModalCenterCipher" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" >
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cifrador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 </div>
-                <div> 
-                    <label>Seleccione el archivo</label>
-                    <p><input type = "file" name = "Archivo_Decifrar" /></p>
-                    <label>Contraseña</label>
-                    <p><input type = "file" name = "Contrasenia_Decifrar" /></p>   
-                    <input type="submit" name="submit_button" value="Decifrar">
+                <div class="modal-body">               
+                    <form action = "http://localhost:5000/Cipher" method = "post">
+                        <div>   
+                            <label>Seleccione el archivo</label>
+                            <p><input type = "file" name = "Archivo_Cifrar" /></p>
+                            <label>Contraseña</label>
+                            <p><input type = "file" name = "Contrasenia_Cifrar" /></p>
+                            <input type="submit" name="submit_button" value="Cifrar">
+                        </div>
+                    </form>    
                 </div>
-                <div>     
-                    <label>Seleccione el archivo</label>
-                    <p><input type = "file" name = "Archivo_Firmar" /></p>
-                    <label>Seleccion la clave privada</label>
-                    <p><input type = "file" name = "Clave_Firmar" /></p>
-                    <label>Mensaje a firmar</label>
-                    <p><input type = "file" name = "Mensaje_Firmar" /></p>
-                    <input type="submit" name="submit_button" value="Firmar">
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" name="submit_button" value="Cifrar">
                 </div>
-                <div> 
-                    <label>Seleccione el archivo</label>
-                    <p><input type = "file" name = "Archivo_Verificar" /></p>
-                    <label>Seleccione la clave pública</label>
-                    <p><input type = "file" name = "Clave_Verificar" /></p>  
-                    <label>Seleccione el mensaje</label>
-                    <p><input type = "file" name = "Mensaje_Verificar" /></p>              
-                    <input type="submit" name="submit_button" value="Verificar">
-                </div> 
-                    <label>Seleccione el archivo</label>
-                    <p><input type = "file" name = "Archivo_CF" /></p>
-                    <label>Contraseña</label>
-                    <p><input type = "file" name = "Contrasenia_CF" /></p>  
-                    <label>Seleccione la clave privada</label>
-                    <p><input type = "file" name = "Clave_CF" /></p>   
-                    <input type="submit" name="submit_button" value="Cifrar y Firmar">
-                <div>
-                    <label>Seleccione el arvhico</label>
-                    <p><input type = "file" name = "Archivo_DV" /></p>
-                    <label>Contraseña</label>
-                    <p><input type = "text" name = "Contrasenia_DV" /></p>
-                    <label>Seleccione la clave pública</label>
-                    <p><input type = "file" name = "Clave_DV" /></p>  
-                    <input type="submit" name="submit_button" value="Decifrar y verificar">
+            </div>
+            </div>
+        </div>
+
+        
+        <!-- Modal Decifrado -->
+        <div class="modal fade" id="ModalCenterDecipher" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Decifrador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 </div>
-        </form>
+                <div class="modal-body">               
+                    <form action = "http://localhost:5000/Decipher" method = "post">
+                        <div>   
+                            <div>
+                                <label>Seleccione el archivo</label>
+                                <p><input type = "file" name = "Archivo_Decifrar" /></p>
+                                <label>Contraseña</label>
+                                <p><input type = "file" name = "Contrasenia_Decifrar" /></p>   
+                                <input type="submit" name="submit_button" value="Decifrar">
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" name="submit_button" value="Decifrar">
+                </div>
+            </div>
+            </div>
+        </div>
+
+                <!-- Modal Firma -->
+                <div class="modal fade" id="ModalCenterSignature" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Firma</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">               
+                            <form action = "http://localhost:5000/Signature" method = "post">
+                                <div>     
+                                    <label>Seleccione el archivo</label>
+                                    <p><input type = "file" name = "Archivo_Firmar" /></p>
+                                    <label>Seleccion la clave privada</label>
+                                    <p><input type = "file" name = "Clave_Firmar" /></p>
+                                    <label>Mensaje a firmar</label>
+                                    <p><input type = "file" name = "Mensaje_Firmar" /></p>
+                                    <input type="submit" name="submit_button" value="Firmar">
+                                </div>
+                            </form>    
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" name="submit_button" value="Firmar">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Modal Verificador -->
+                <div class="modal fade" id="ModalCenterVerify" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Verificador</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">               
+                            <form action = "http://localhost:5000/Verify" method = "post">
+                                <div> 
+                                    <label>Seleccione el archivo</label>
+                                    <p><input type = "file" name = "Archivo_Verificar" /></p>
+                                    <label>Seleccione la clave pública</label>
+                                    <p><input type = "file" name = "Clave_Verificar" /></p>  
+                                    <label>Seleccione el mensaje</label>
+                                    <p><input type = "file" name = "Mensaje_Verificar" /></p>              
+                                    <input type="submit" name="submit_button" value="Verificar">
+                                </div> 
+                            </form>    
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" name="submit_button" value="Verificar">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Modal Firma y Cifrado-->
+                <div class="modal fade" id="ModalCenterSigCip" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Firma y Cipfrado</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">               
+                            <form action = "http://localhost:5000/SigCip" method = "post">
+                                <div>
+                                    <label>Seleccione el archivo</label>
+                                    <p><input type = "file" name = "Archivo_CF" /></p>
+                                    <label>Contraseña</label>
+                                    <p><input type = "file" name = "Contrasenia_CF" /></p>  
+                                    <label>Seleccione la clave privada</label>
+                                    <p><input type = "file" name = "Clave_CF" /></p>   
+                                    <input type="submit" name="submit_button" value="Cifrar y Firmar">
+                                </div>
+                            </form>    
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" name="submit_button" value="Cifrar y Firmar">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Modal Verificar y Decifrar-->
+                <div class="modal fade" id="ModalCenterDecVer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Verificación y Decifrado</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">               
+                            <form action = "http://localhost:5000/DecVer" method = "post">
+                                <div>
+                                    <label>Seleccione el arvhico</label>
+                                    <p><input type = "file" name = "Archivo_DV" /></p>
+                                    <label>Contraseña</label>
+                                    <p><input type = "text" name = "Contrasenia_DV" /></p>
+                                    <label>Seleccione la clave pública</label>
+                                    <p><input type = "file" name = "Clave_DV" /></p>  
+                                    <input type="submit" name="submit_button" value="Decifrar y verificar">
+                                </div>
+                        </form>
+                            </form>    
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" name="submit_button" value="Decifrar y verificar">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
 {% endblock %}

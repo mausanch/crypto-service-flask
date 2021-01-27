@@ -7,7 +7,7 @@ from dominate.tags import img
 
 #Se importan los modulos correspondientes 
 from KEYGENCIPHERFUN import genAlicemsg,genBobmsg,genAlicesharedkey,encriptar,desencriptar
-from VERIFICACION import verificar
+from VERIFICACION import verificacion
 
 
 logo = img(src='./static/img/Turing_Machine.png', height="50", width="50", style="margin-top:-15px")
@@ -26,8 +26,7 @@ bootstrap = Bootstrap(app)
 def index():
     return render_template('index.html')
 
-
-
+'''
 @app.route('/services',methods = ['POST', 'GET'])
 def services():
     iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
@@ -54,13 +53,70 @@ def services():
             dire=  request.form['Archivo_Verificar']
             key=   request.form['Clave_Verificar']
             message= request.form['Mensaje_Verificar']
-            return verificar(dire,key,message) 
+            return verificacion(dire,key,message) 
         elif request.form['submit_button'] == 'Cifrar y Firmar':
             pass # do something else
         elif request.form['submit_button'] == 'Decifrar y verificar':
             pass # do something else
         else:
             pass # unknown
+'''
+
+@app.route('/Cipher',methods = ['POST', 'GET'])
+def Cipher():
+    iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
+    iv = bytearray(iv)
+    if request.method == 'POST':    
+        dire=  request.form['Archivo_Cifrar']
+        key=   request.form['Contrasenia_Cifrar']
+        dirout=request.form['Archivo_Cifrar']        
+        return encriptar(dire,key,iv,dirout)
+
+
+@app.route('/Decipher',methods = ['POST', 'GET'])
+def Decipher():
+    iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
+    iv = bytearray(iv)
+    if request.method == 'POST':
+        dire=  request.form['Archivo_Decifrar']
+        key=   request.form['Contrasenia_Decifrar']
+        iv=    request.form['IV_Decifrar']
+        dirout=request.form['Archivo_Decifrar']
+        return desencriptar(dire,key,iv,dirout) 
+ 
+
+ 
+@app.route('/Signature',methods = ['POST', 'GET'])
+def Signature():
+    if request.method == 'POST': 
+        dire=  request.form['Archivo_Firmar']
+        key=   request.form['Clave_Firmar']
+        message=   request.form['Mensaje_Firmar']
+        return Firma (dire,key,message) 
+ 
+@app.route('/Verify',methods = ['POST', 'GET'])
+def Verify():
+    if request.method == 'POST':
+        dire=  request.form['Archivo_Verificar']
+        key=   request.form['Clave_Verificar']
+        message= request.form['Mensaje_Verificar']
+        return verificacion(dire,key,message) 
+
+@app.route('/SigCip',methods = ['POST', 'GET'])
+def SigCip():
+    iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
+    iv = bytearray(iv)
+    if request.method == 'POST':
+        pass
+
+@app.route('/DecVer',methods = ['POST', 'GET'])
+def DecVer():
+    iv = {1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6}
+    iv = bytearray(iv)
+    if request.method == 'POST':
+        pass
+
+
 
 if __name__ == '__main__':
    app.run()

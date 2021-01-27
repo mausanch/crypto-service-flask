@@ -9,6 +9,7 @@ pip install Crypto
 pip install errno
 pip install flask-compress
 pip install flask-bootstrap
+pip install flask_nav
 
 deactivate
 
