@@ -8,7 +8,7 @@ from dominate.tags import img
 #Se importan los modulos correspondientes 
 from KEYGENCIPHERFUN import genAlicemsg,genBobmsg,genAlicesharedkey,encriptar,desencriptar
 from VERIFICACION import verificacion
-
+from Firma import Firma
 
 logo = img(src='./static/img/Turing_Machine.png', height="50", width="50", style="margin-top:-15px")
 topbar = Navbar(logo)

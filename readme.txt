@@ -1,5 +1,6 @@
 Para activar el env, Desde CMD ubicarse en carpeta raiz del proyecto y ejecutar 
-venv\Scripts\activate.bat
+
+env\Scripts\activate.bat
 
 Instalamos los módulos de Flask y demás librerías necesarias 
 

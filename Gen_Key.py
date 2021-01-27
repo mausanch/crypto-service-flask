@@ -3,6 +3,11 @@ from Cryptodome.Hash import SHA256
 from Cryptodome.PublicKey import RSA
 from Cryptodome.Signature import PKCS1_v1_5
 
+
+generarFirma()
+
+
+
 #funcion de generacion de firmas
 #se ingresa la direccion de donde se quiere guardar las claves de salida
 def generarFirma(clave_privada_out, clave_publica_out):
