@@ -112,9 +112,10 @@ def genAlicesharedkey(routemsg, routekeyp,routeshkey):
 #modo cbc y direccion del archivo de salida
 def encriptar(dire,key,iv,dirout):
     encriptador = AES.new(key, AES.MODE_CBC, iv)
-    file_name='ArchivoCifrado.txt'  
+    file_name='ArchivoCifrado.txt'
     dirout=dirout+file_name
     archivo = open(dire,"rb")
+    archivo = dire
     archivo_encriptado = open(dirout,"wb")
     while True:
         data = archivo.read(16)
@@ -134,13 +135,15 @@ def encriptar(dire,key,iv,dirout):
 #modo cbc y direccion del archivo de salida, se debe especificar el tipo de archivo
 def desencriptar(dire,key,iv,dirout):
     archivo = open(dire,"rb")
-    file_name='ArchivoCifrado.txt'
-    dirout=dirout+file_name
+    #file_name='ArchivoCifrado.txt'
+    #dirout=dirout+file_name
+    #tam = len(dire.read())
     tam = os.path.getsize(dire)
     encriptador = AES.new(key, AES.MODE_CBC, iv)
     archivo_desencriptado = open(dirout, 'wb')
     while True:
         data = archivo.read(256)
+        #print(data)
         n = len(data)
         if n == 0:
             break
@@ -154,7 +157,7 @@ def desencriptar(dire,key,iv,dirout):
     archivo.close()
     archivo_desencriptado.close()
     return archivo_desencriptado
-    
+
 
 #el codigo de abajo es para probar las funciones solo retire las comillas
 '''

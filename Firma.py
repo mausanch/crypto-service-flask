@@ -10,13 +10,16 @@ import base64
 
 def Firma (key,messagerec,UploadDirectory):
 
-    message = open(messagerec, 'rb')  
+    message = open(messagerec, 'rb')
     archivo_leido = message.read()
-    archivo_codificado = base64.b64encode(archivo_leido) #CONVERSION A 64 BITS 
+    archivo_codificado = base64.b64encode(archivo_leido) #CONVERSION A 64 BITS
     message.close()
 
-    with open(key, 'rb') as f:
-        key = RSA.importKey(f.read())
+    #with open(key, 'rb') as f:
+    #    key = RSA.import_Key(f.read())
+
+    f = open(key, 'rb')
+    key = RSA.import_key(f.read())
 
     hasher = SHA256.new(archivo_codificado)
     signer = PKCS1_v1_5.new(key)

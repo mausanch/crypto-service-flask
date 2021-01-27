@@ -12,21 +12,23 @@ def verificacion(firma_digital_in, archivo_a_verificar, llave_publica):
 
     Verificador=open(firma_digital_in,'rb').read()
 
-    message = open(archivo_a_verificar, 'rb')  ## Leemos ARCHIVO 
+    message = open(archivo_a_verificar, 'rb')  ## Leemos ARCHIVO
     archivo_leido = message.read()
-    archivo_codificado = base64.b64encode(archivo_leido) #CONVERSION A 64 BITS 
+    archivo_codificado = base64.b64encode(archivo_leido) #CONVERSION A 64 BITS
 
 
-    with open(llave_publica, 'rb') as f:
-        key = RSA.importKey(f.read())
+    f = open(llave_publica, 'rb')
+    key = RSA.import_key(f.read())
     hasher = SHA256.new(archivo_codificado)
     verifier = PKCS1_v1_5.new(key)
     if verifier.verify(hasher, Verificador):
         print('Verificaccion CORRECTA')
+        success=1
     else:
         print('EL MENSAJE NO ES EL MISMO')
-    
-    return 0
+        success=0
+
+    return success
 
 
 '''
