@@ -114,7 +114,7 @@ def encriptar(dire,key,iv,dirout):
     encriptador = AES.new(key, AES.MODE_CBC, iv)
     file_name='ArchivoCifrado.txt'
     dirout=dirout+file_name
-    archivo = open(dire,"rb")
+    #archivo = open(dire,"rb")
     archivo = dire
     archivo_encriptado = open(dirout,"wb")
     while True:
